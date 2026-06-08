@@ -1,0 +1,1174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Legendary Club Owner — Prove You're the Best</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@400;600;700&family=Barlow+Condensed:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --black:  #080808;
+      --dark:   #0e0e0e;
+      --pitch:  #0b1c0c;
+      --lime:   #b5f033;
+      --lime2:  rgba(181,240,51,0.12);
+      --white:  #f2ede4;
+      --grey:   #666;
+      --border: rgba(181,240,51,0.14);
+      --gold:   #f5c518;
+      --silver: #b0b8c1;
+      --bronze: #cd7f32;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--black); color: var(--white); font-family: 'Barlow', sans-serif; overflow-x: hidden; }
+
+    /* noise */
+    body::before {
+      content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 9999; opacity: .4;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: .9rem 2rem;
+      background: rgba(8,8,8,0.9); backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo { font-family:'Bebas Neue',sans-serif; font-size:1.25rem; letter-spacing:.1em; color:var(--lime); }
+    .nav-cta {
+      background: var(--lime); color: var(--black);
+      font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:.8rem;
+      letter-spacing:.12em; text-transform:uppercase;
+      padding:.45rem 1.2rem; border:none; cursor:pointer; text-decoration:none;
+      transition: background .2s, transform .15s;
+    }
+    .nav-cta:hover { background:#ceff55; transform:translateY(-1px); }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100svh; display:grid; place-items:center;
+      position:relative; padding:7rem 2rem 4rem; overflow:hidden;
+    }
+    #hero::after {
+      content:''; position:absolute; inset:0; z-index:0;
+      background:
+        radial-gradient(ellipse 90% 55% at 50% 115%, rgba(26,74,28,.65) 0%, transparent 68%),
+        linear-gradient(rgba(181,240,51,.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(181,240,51,.03) 1px, transparent 1px);
+      background-size: auto, 55px 55px, 55px 55px;
+    }
+    .hero-inner { position:relative; z-index:1; max-width:820px; text-align:center; }
+
+    .hero-eyebrow {
+      font-family:'Barlow Condensed',sans-serif; font-size:.75rem;
+      letter-spacing:.3em; text-transform:uppercase; color:var(--lime);
+      margin-bottom:1.4rem; opacity:0; animation:fadeUp .6s .1s forwards;
+    }
+    h1 {
+      font-family:'Bebas Neue',sans-serif;
+      font-size: clamp(3rem, 11vw, 7.5rem);
+      line-height:.92; letter-spacing:.02em; color:var(--white);
+      opacity:0; animation:fadeUp .7s .25s forwards;
+    }
+    h1 em { color:var(--lime); font-style:normal; }
+
+    .hero-sub {
+      margin-top:1.5rem; font-size:clamp(.95rem, 2.2vw, 1.15rem);
+      color:rgba(242,237,228,.6); max-width:520px; margin-inline:auto;
+      line-height:1.6; opacity:0; animation:fadeUp .7s .4s forwards;
+    }
+    .hero-social-proof {
+      margin-top:1rem; font-family:'Barlow Condensed',sans-serif;
+      font-size:.82rem; letter-spacing:.06em;
+      color:rgba(181,240,51,.7); opacity:0; animation:fadeUp .6s .5s forwards;
+    }
+    .hero-actions {
+      margin-top:2.2rem; display:flex; gap:.9rem; justify-content:center; flex-wrap:wrap;
+      opacity:0; animation:fadeUp .7s .55s forwards;
+    }
+    .btn-primary {
+      background:var(--lime); color:var(--black);
+      font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:1.05rem;
+      letter-spacing:.1em; text-transform:uppercase;
+      padding:.95rem 2.4rem; border:none; cursor:pointer;
+      transition: background .2s, transform .15s, box-shadow .2s;
+    }
+    .btn-primary:hover { background:#ceff55; transform:translateY(-2px); box-shadow:0 8px 32px rgba(181,240,51,.25); }
+    .btn-ghost {
+      background:transparent; color:var(--white);
+      font-family:'Barlow Condensed',sans-serif; font-weight:600; font-size:1.05rem;
+      letter-spacing:.08em; text-transform:uppercase;
+      padding:.95rem 2.4rem; border:1px solid rgba(242,237,228,.22); cursor:pointer;
+      transition: border-color .2s, color .2s;
+    }
+    .btn-ghost:hover { border-color:var(--lime); color:var(--lime); }
+
+    /* hero stat strip */
+    .hero-stats {
+      margin-top:3rem; display:flex; gap:0; justify-content:center;
+      flex-wrap:wrap; opacity:0; animation:fadeUp .7s .7s forwards;
+      border:1px solid var(--border);
+      max-width:560px; margin-inline:auto;
+    }
+    .hstat {
+      flex:1; min-width:120px; padding:1rem .5rem;
+      text-align:center; border-right:1px solid var(--border);
+    }
+    .hstat:last-child { border-right:none; }
+    .hstat-num {
+      font-family:'Bebas Neue',sans-serif; font-size:2rem;
+      color:var(--lime); line-height:1; display:block;
+    }
+    .hstat-label {
+      font-family:'Barlow Condensed',sans-serif; font-size:.7rem;
+      letter-spacing:.12em; text-transform:uppercase;
+      color:rgba(242,237,228,.45); margin-top:.2rem; display:block;
+    }
+
+    /* ── TICKER ── */
+    .ticker-wrap {
+      overflow:hidden; border-top:1px solid var(--border);
+      border-bottom:1px solid var(--border);
+      background:var(--pitch); padding:.7rem 0;
+    }
+    .ticker { display:flex; width:max-content; animation:ticker 32s linear infinite; }
+    .ticker-item {
+      padding:0 2.5rem;
+      font-family:'Barlow Condensed',sans-serif; font-size:.78rem;
+      letter-spacing:.16em; text-transform:uppercase;
+      color:rgba(242,237,228,.35); white-space:nowrap;
+    }
+    .ticker-item b { color:var(--lime); margin-right:.35em; }
+    @keyframes ticker { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+    /* ── DASHBOARD ── */
+    #dashboard { padding:5.5rem 2rem; }
+    .sec-eye {
+      font-family:'Barlow Condensed',sans-serif; font-size:.72rem;
+      letter-spacing:.3em; text-transform:uppercase; color:var(--lime);
+      text-align:center; margin-bottom:.8rem;
+    }
+    .sec-title {
+      font-family:'Bebas Neue',sans-serif;
+      font-size:clamp(2rem,6vw,3.4rem);
+      text-align:center; line-height:1; color:var(--white); margin-bottom:3rem;
+    }
+    .db-wrap { max-width:880px; margin:0 auto; }
+
+    /* Season bar */
+    .season-bar {
+      display:flex; align-items:center; justify-content:space-between;
+      flex-wrap:wrap; gap:.8rem;
+      background:var(--dark); border:1px solid var(--border);
+      padding:.9rem 1.4rem; margin-bottom:1.5px;
+    }
+    .season-left { display:flex; align-items:center; gap:.9rem; }
+    .live-dot {
+      width:.55rem; height:.55rem; border-radius:50%;
+      background:var(--lime); box-shadow:0 0 7px var(--lime);
+      animation:pulse 1.6s infinite;
+    }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.3} }
+    .season-name {
+      font-family:'Barlow Condensed',sans-serif; font-weight:700;
+      font-size:.95rem; letter-spacing:.07em; text-transform:uppercase;
+    }
+    .season-meta {
+      font-family:'Barlow Condensed',sans-serif; font-size:.72rem;
+      letter-spacing:.1em; text-transform:uppercase; color:var(--grey);
+    }
+    .prize-badge {
+      background:var(--lime2); border:1px solid var(--border);
+      padding:.28rem .85rem;
+      font-family:'Barlow Condensed',sans-serif; font-size:.75rem;
+      letter-spacing:.1em; text-transform:uppercase; color:var(--lime);
+    }
+
+    /* Countdown */
+    .cd-row { display:flex; gap:1.5px; background:var(--border); margin-bottom:1.5px; }
+    .cd-block {
+      flex:1; background:var(--dark); padding:.65rem;
+      text-align:center;
+    }
+    .cd-num { font-family:'Bebas Neue',sans-serif; font-size:1.55rem; color:var(--lime); line-height:1; }
+    .cd-unit {
+      font-family:'Barlow Condensed',sans-serif; font-size:.6rem;
+      letter-spacing:.14em; text-transform:uppercase; color:var(--grey); margin-top:.1rem;
+    }
+
+    /* Tier bands */
+    .tier-bands { display:grid; grid-template-columns:repeat(3,1fr); gap:1.5px; background:var(--border); margin-bottom:1.5px; }
+    @media(max-width:500px){ .tier-bands{ grid-template-columns:1fr; } }
+    .t-band { background:var(--dark); padding:1rem 1.2rem; position:relative; overflow:hidden; }
+    .t-band::before { content:''; position:absolute; top:0;left:0;right:0; height:2px; }
+    .t-band.gold::before   { background:var(--gold); }
+    .t-band.silver::before { background:var(--silver); }
+    .t-band.bronze::before { background:var(--bronze); }
+    .t-rank { font-family:'Barlow Condensed',sans-serif; font-size:.68rem; letter-spacing:.14em; text-transform:uppercase; margin-bottom:.3rem; display:block; }
+    .t-band.gold   .t-rank { color:var(--gold); }
+    .t-band.silver .t-rank { color:var(--silver); }
+    .t-band.bronze .t-rank { color:var(--bronze); }
+    .t-prize { font-family:'Bebas Neue',sans-serif; font-size:1.7rem; color:var(--white); line-height:1; display:block; }
+    .t-note { font-size:.72rem; color:var(--grey); margin-top:.15rem; display:block; }
+
+    /* Table */
+    .lb-table { width:100%; border-collapse:collapse; }
+    .lb-table thead tr { background:#0c0c0c; border-bottom:1px solid var(--border); }
+    .lb-table th {
+      font-family:'Barlow Condensed',sans-serif; font-size:.68rem;
+      letter-spacing:.18em; text-transform:uppercase; color:var(--grey);
+      padding:.65rem 1rem; text-align:left; font-weight:600;
+    }
+    .lb-table th:last-child, .lb-table td:last-child { text-align:right; }
+    .lb-table tbody tr { border-bottom:1px solid rgba(181,240,51,.05); transition:background .18s; }
+    .lb-table tbody tr:hover { background:rgba(181,240,51,.04); }
+    .lb-table td { padding:.75rem 1rem; }
+    .rk { font-family:'Bebas Neue',sans-serif; font-size:1.05rem; color:var(--grey); min-width:1.8rem; display:block; }
+    .rk-1 { color:var(--gold); } .rk-2 { color:var(--silver); } .rk-3 { color:var(--bronze); }
+    .mgr-name { font-family:'Barlow Condensed',sans-serif; font-weight:600; font-size:.92rem; letter-spacing:.03em; }
+    .mgr-club { font-size:.72rem; color:var(--grey); margin-top:.08rem; }
+    .form { display:flex; gap:.25rem; }
+    .fw,.fd,.fl { width:1.2rem; height:1.2rem; display:flex; align-items:center; justify-content:center; font-family:'Barlow Condensed',sans-serif; font-size:.6rem; font-weight:700; }
+    .fw { background:rgba(181,240,51,.15); color:var(--lime); }
+    .fd { background:rgba(255,255,255,.07); color:var(--grey); }
+    .fl { background:rgba(220,50,50,.13); color:#d95555; }
+    .pts { font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:.9rem; }
+    .prize-val { font-family:'Bebas Neue',sans-serif; font-size:1.1rem; }
+    .prize-gold   { color:var(--gold); }
+    .prize-silver { color:var(--silver); }
+    .prize-bronze { color:var(--bronze); }
+    .prize-green  { color:var(--lime); }
+    .prize-grey   { color:var(--grey); }
+
+    .you-row td {
+      border-top:1px solid var(--border); border-bottom:1px solid var(--border);
+      background:rgba(181,240,51,.045); padding:.7rem 1rem;
+    }
+    .you-label {
+      font-family:'Barlow Condensed',sans-serif; font-size:.78rem;
+      letter-spacing:.13em; text-transform:uppercase; color:var(--lime);
+    }
+    .lb-foot {
+      background:var(--dark); border:1px solid var(--border); border-top:none;
+      padding:.85rem 1.2rem;
+      display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:.8rem;
+    }
+    .lb-foot-note { font-size:.75rem; color:var(--grey); }
+    .lb-foot-note b { color:var(--lime); }
+    .lb-cta {
+      background:var(--lime); color:var(--black);
+      font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:.82rem;
+      letter-spacing:.1em; text-transform:uppercase;
+      padding:.48rem 1.25rem; border:none; cursor:pointer; transition:background .2s;
+    }
+    .lb-cta:hover { background:#ceff55; }
+
+    /* ── STATS STRIP ── */
+    #stats { padding:0 2rem; }
+    .stats-strip {
+      max-width:880px; margin:0 auto;
+      display:grid; grid-template-columns:repeat(4,1fr);
+      gap:1.5px; background:var(--border);
+    }
+    @media(max-width:600px){ .stats-strip{ grid-template-columns:repeat(2,1fr); } }
+    .stat-block {
+      background:var(--dark); padding:2rem 1.2rem; text-align:center;
+      position:relative; overflow:hidden; transition:background .25s;
+    }
+    .stat-block:hover { background:#131313; }
+    .stat-block::after {
+      content:''; position:absolute; bottom:0;left:0;right:0; height:2px;
+      background:var(--lime); transform:scaleX(0); transform-origin:left;
+      transition:transform .3s;
+    }
+    .stat-block:hover::after { transform:scaleX(1); }
+    .stat-big {
+      font-family:'Bebas Neue',sans-serif; font-size:3.2rem;
+      color:var(--lime); line-height:1; display:block;
+    }
+    .stat-sub {
+      font-family:'Barlow Condensed',sans-serif; font-size:.72rem;
+      letter-spacing:.14em; text-transform:uppercase;
+      color:rgba(242,237,228,.45); margin-top:.4rem; display:block;
+    }
+
+    /* ── GAME LOOP ── */
+    #loop { padding:5.5rem 2rem; background:rgba(11,28,12,.3); }
+    .loop-track {
+      max-width:1000px; margin:3rem auto 0;
+      display:grid; grid-template-columns:repeat(5,1fr);
+      position:relative;
+    }
+    @media(max-width:750px){ .loop-track{ grid-template-columns:1fr 1fr; gap:0; } }
+    @media(max-width:420px){ .loop-track{ grid-template-columns:1fr; } }
+
+    /* horizontal connector line */
+    .loop-track::before {
+      content:''; position:absolute;
+      top:2.1rem; left:10%; right:10%; height:1px;
+      background:linear-gradient(90deg,transparent,var(--border) 20%,var(--border) 80%,transparent);
+    }
+    @media(max-width:750px){ .loop-track::before{ display:none; } }
+
+    .lstep { text-align:center; padding:1rem .6rem; }
+    .lstep-num {
+      width:2.6rem; height:2.6rem;
+      border:1px solid var(--lime);
+      font-family:'Bebas Neue',sans-serif; font-size:1.15rem; color:var(--lime);
+      display:flex; align-items:center; justify-content:center;
+      margin:0 auto .9rem; background:var(--black); position:relative; z-index:1;
+      transition:background .25s, color .25s;
+    }
+    .lstep:hover .lstep-num { background:var(--lime); color:var(--black); }
+    .lstep-title {
+      font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:.9rem;
+      letter-spacing:.07em; text-transform:uppercase; color:var(--white);
+      margin-bottom:.3rem;
+    }
+    .lstep-desc { font-size:.78rem; color:var(--grey); line-height:1.5; }
+    .lstep-arrow {
+      position:absolute; right:-.5rem; top:1.85rem;
+      font-size:.9rem; color:var(--lime); z-index:2;
+    }
+    @media(max-width:750px){ .lstep-arrow{ display:none; } }
+    .lstep { position:relative; }
+
+    /* ── AI VISUAL ── */
+    #visual { padding:5rem 2rem; }
+    .vis-grid {
+      max-width:1040px; margin:0 auto;
+      display:grid; grid-template-columns:1fr 1fr;
+      gap:3rem; align-items:center;
+    }
+    @media(max-width:680px){ .vis-grid{ grid-template-columns:1fr; } }
+
+    .vis-copy h2 {
+      font-family:'Bebas Neue',sans-serif;
+      font-size:clamp(2.2rem,6vw,3.8rem); line-height:.97; margin-bottom:1.1rem;
+    }
+    .vis-copy h2 em { color:var(--lime); font-style:normal; }
+    .vis-quote {
+      border-left:2px solid var(--lime); padding-left:1rem;
+      font-size:.95rem; font-style:italic;
+      color:rgba(242,237,228,.75); margin-bottom:1.3rem; line-height:1.6;
+    }
+    .vis-copy p {
+      font-size:.9rem; color:rgba(242,237,228,.5);
+      line-height:1.7; margin-bottom:1.4rem;
+    }
+
+    .ai-frame {
+      position:relative; aspect-ratio:4/3;
+      background:var(--pitch); border:1px solid var(--border); overflow:hidden;
+    }
+    .ai-frame img { width:100%; height:100%; object-fit:cover; display:block; }
+    .ai-frame svg { position:absolute; inset:0; width:100%; height:100%; }
+    .ai-badge {
+      position:absolute; bottom:.7rem; right:.7rem;
+      background:rgba(8,8,8,.9); border:1px solid var(--border);
+      font-family:'Barlow Condensed',sans-serif; font-size:.65rem;
+      letter-spacing:.12em; color:var(--lime); padding:.2rem .5rem; text-transform:uppercase;
+    }
+
+    /* ── REWARD ── */
+    #reward { padding:5rem 2rem; background:var(--lime); text-align:center; }
+    #reward h2 {
+      font-family:'Bebas Neue',sans-serif;
+      font-size:clamp(2.4rem,8vw,5.5rem); color:var(--black);
+      line-height:.92; margin-bottom:.9rem;
+    }
+    #reward p {
+      font-size:1rem; color:rgba(8,8,8,.65);
+      max-width:500px; margin:0 auto 2rem; line-height:1.65;
+    }
+    .btn-dark {
+      background:var(--black); color:var(--lime);
+      font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:1.05rem;
+      letter-spacing:.12em; text-transform:uppercase;
+      padding:.95rem 2.4rem; border:none; cursor:pointer; transition:background .2s;
+    }
+    .btn-dark:hover { background:#181818; }
+
+    /* ── FOOTER ── */
+    footer {
+      padding:1.6rem 2rem; border-top:1px solid var(--border);
+      display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:.8rem;
+    }
+    .footer-logo { font-family:'Bebas Neue',sans-serif; font-size:1.05rem; letter-spacing:.1em; color:var(--lime); }
+    footer p { font-size:.74rem; color:var(--grey); }
+
+    /* ── SVG ICONS (inline, reusable) ── */
+    .icon { display:block; flex-shrink:0; }
+
+    /* ── MANAGER SPOTLIGHT ── */
+    #spotlight { padding:5.5rem 2rem; background:rgba(11,28,12,.2); }
+    .spotlight-wrap { max-width:1040px; margin:0 auto; }
+
+    /* Two-column master layout */
+    .sp-layout {
+      display:grid; grid-template-columns:1fr 420px;
+      gap:1.5px; background:var(--border);
+      align-items:start;
+    }
+    @media(max-width:860px){ .sp-layout{ grid-template-columns:1fr; } }
+
+    /* LEFT COLUMN */
+    .sp-left { display:flex; flex-direction:column; gap:1.5px; background:var(--border); }
+
+    /* Identity card */
+    .sp-card {
+      background:var(--dark);
+      display:grid; grid-template-columns:auto 1fr auto;
+      gap:1.2rem; align-items:center;
+      padding:1.3rem 1.5rem;
+    }
+    @media(max-width:500px){ .sp-card{ grid-template-columns:auto 1fr; } }
+    .sp-avatar {
+      width:3.5rem; height:3.5rem;
+      background:var(--lime2); border:1px solid var(--border);
+      display:flex; align-items:center; justify-content:center;
+      font-family:'Bebas Neue',sans-serif; font-size:1.4rem; color:var(--lime);
+      flex-shrink:0;
+    }
+    .sp-name {
+      font-family:'Barlow Condensed',sans-serif; font-weight:700;
+      font-size:1.05rem; letter-spacing:.04em; color:var(--white);
+      display:block; margin-bottom:.12rem;
+    }
+    .sp-meta {
+      font-family:'Barlow Condensed',sans-serif; font-size:.68rem;
+      letter-spacing:.12em; text-transform:uppercase; color:var(--grey); display:block;
+    }
+    .sp-rank-badge {
+      background:var(--lime2); border:1px solid var(--border);
+      padding:.45rem .9rem; text-align:center; flex-shrink:0;
+    }
+    @media(max-width:500px){ .sp-rank-badge{ display:none; } }
+    .sp-rank-num { font-family:'Bebas Neue',sans-serif; font-size:1.7rem; color:var(--gold); line-height:1; display:block; }
+    .sp-rank-label { font-family:'Barlow Condensed',sans-serif; font-size:.6rem; letter-spacing:.13em; text-transform:uppercase; color:var(--grey); }
+
+    /* Season stats */
+    .sp-season-row {
+      display:grid; grid-template-columns:repeat(5,1fr);
+      gap:1.5px; background:var(--border);
+    }
+    @media(max-width:500px){ .sp-season-row{ grid-template-columns:repeat(3,1fr); } }
+    .sp-stat { background:var(--dark); padding:.85rem .6rem; text-align:center; }
+    .sp-stat-val { font-family:'Bebas Neue',sans-serif; font-size:1.45rem; color:var(--white); line-height:1; display:block; }
+    .sp-stat-val.green { color:var(--lime); }
+    .sp-stat-val.gold  { color:var(--gold); }
+    .sp-stat-label { font-family:'Barlow Condensed',sans-serif; font-size:.6rem; letter-spacing:.12em; text-transform:uppercase; color:var(--grey); margin-top:.18rem; display:block; }
+
+    /* Infrastructure rows */
+    .sp-infra-list { display:flex; flex-direction:column; gap:1.5px; background:var(--border); }
+    .sp-infra {
+      background:var(--dark); padding:1rem 1.3rem;
+      display:flex; align-items:center; gap:.9rem;
+      transition:background .2s;
+    }
+    .sp-infra:hover { background:#131313; }
+    .sp-infra-icon {
+      width:2.2rem; height:2.2rem; flex-shrink:0;
+      border:1px solid var(--border);
+      display:flex; align-items:center; justify-content:center;
+    }
+    .sp-infra-body { flex:1; }
+    .sp-infra-name {
+      font-family:'Barlow Condensed',sans-serif; font-weight:700;
+      font-size:.8rem; letter-spacing:.08em; text-transform:uppercase;
+      color:var(--white); margin-bottom:.28rem; display:block;
+    }
+    .sp-bar-wrap { height:2px; background:rgba(181,240,51,.1); position:relative; margin-bottom:.22rem; }
+    .sp-bar-fill {
+      position:absolute; top:0; left:0; height:100%;
+      background:var(--lime); transition:width 1.3s cubic-bezier(.4,0,.2,1); width:0;
+    }
+    .sp-bar-fill.animate { width:var(--w); }
+    .sp-bar-label { font-family:'Barlow Condensed',sans-serif; font-size:.65rem; letter-spacing:.05em; color:var(--grey); }
+    .sp-bar-label b { color:var(--lime); }
+
+    /* Tactic row */
+    .sp-tactic-row {
+      display:grid; grid-template-columns:1fr 1fr;
+      gap:1.5px; background:var(--border);
+    }
+    .sp-tactic { background:var(--dark); padding:1rem 1.3rem; }
+    .sp-tactic-label { font-family:'Barlow Condensed',sans-serif; font-size:.65rem; letter-spacing:.15em; text-transform:uppercase; color:var(--grey); display:block; margin-bottom:.25rem; }
+    .sp-tactic-val { font-family:'Bebas Neue',sans-serif; font-size:1.35rem; color:var(--white); display:block; line-height:1; }
+    .sp-tactic-val em { color:var(--lime); font-style:normal; }
+
+    /* Footer */
+    .sp-foot {
+      background:rgba(181,240,51,.04); border-top:1px solid var(--border);
+      padding:.8rem 1.3rem;
+      display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:.8rem;
+    }
+    .sp-foot-note { font-size:.73rem; color:var(--grey); }
+    .sp-foot-note b { color:var(--lime); }
+
+    /* RIGHT COLUMN — Club illustration panel */
+    .sp-right {
+      background:var(--dark);
+      display:flex; flex-direction:column;
+      position:relative; overflow:hidden;
+    }
+    .sp-right-label {
+      font-family:'Barlow Condensed',sans-serif; font-size:.68rem;
+      letter-spacing:.2em; text-transform:uppercase; color:var(--lime);
+      padding:.7rem 1.1rem; border-bottom:1px solid var(--border);
+      background:rgba(181,240,51,.04);
+    }
+    .sp-pitch-wrap {
+      flex:1; padding:1.2rem; display:flex;
+      align-items:center; justify-content:center;
+    }
+    /* player dots overlay */
+    .player-dot {
+      transition:opacity .3s;
+    }
+    .sp-club-details {
+      padding:.9rem 1.1rem; border-top:1px solid var(--border);
+      display:grid; grid-template-columns:1fr 1fr; gap:.6rem;
+    }
+    .sp-detail-item { }
+    .sp-detail-key {
+      font-family:'Barlow Condensed',sans-serif; font-size:.6rem;
+      letter-spacing:.14em; text-transform:uppercase; color:var(--grey); display:block;
+    }
+    .sp-detail-val {
+      font-family:'Barlow Condensed',sans-serif; font-weight:700;
+      font-size:.88rem; letter-spacing:.03em; color:var(--white);
+    }
+    .sp-detail-val em { color:var(--lime); font-style:normal; }
+
+    /* ── ANIMS ── */
+    @keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+    .reveal { opacity:0; transform:translateY(26px); transition:opacity .55s ease, transform .55s ease; }
+    .reveal.visible { opacity:1; transform:translateY(0); }
+    .d1{transition-delay:.1s} .d2{transition-delay:.2s} .d3{transition-delay:.3s} .d4{transition-delay:.4s}
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <span class="nav-logo">Legendary Club Owner</span>
+  <a href="#dashboard" class="nav-cta">See the Leaderboard</a>
+</nav>
+
+<!-- ══════ HERO ══════ -->
+<section id="hero">
+  <div class="hero-inner">
+    <p class="hero-eyebrow">Mobile Football Management · Free to Play · Real Rewards</p>
+    <h1>Every football<br>manager says<br>they're the best.<br><em>Prove it.</em></h1>
+    <p class="hero-sub">Build your club. Master your tactics. Compete against real players and earn real rewards.</p>
+    <p class="hero-social-proof">↑ Played by 340,000+ managers in Turkey · International launch coming soon</p>
+    <div class="hero-actions">
+      <button class="btn-primary" onclick="document.getElementById('dashboard').scrollIntoView({behavior:'smooth'})">Start Your Legacy</button>
+      <button class="btn-ghost"   onclick="document.getElementById('loop').scrollIntoView({behavior:'smooth'})">How It Works</button>
+    </div>
+    <div class="hero-stats">
+      <div class="hstat"><span class="hstat-num">0%</span><span class="hstat-label">Pay-to-Win</span></div>
+      <div class="hstat"><span class="hstat-num">£4.2K</span><span class="hstat-label">Season Prize</span></div>
+      <div class="hstat"><span class="hstat-num">90</span><span class="hstat-label">Min Simulations</span></div>
+      <div class="hstat"><span class="hstat-num">100%</span><span class="hstat-label">Skill-Based</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker">
+    <span class="ticker-item"><b>⚽</b> No luck. Pure skill.</span>
+    <span class="ticker-item"><b>🏆</b> Real cash rewards every season</span>
+    <span class="ticker-item"><b>📊</b> Powered by real match data</span>
+    <span class="ticker-item"><b>🧠</b> Tactics beat wallets</span>
+    <span class="ticker-item"><b>💰</b> Free to play. Never pay to win.</span>
+    <span class="ticker-item"><b>🏟️</b> Build your dynasty from scratch</span>
+    <span class="ticker-item"><b>⚽</b> No luck. Pure skill.</span>
+    <span class="ticker-item"><b>🏆</b> Real cash rewards every season</span>
+    <span class="ticker-item"><b>📊</b> Powered by real match data</span>
+    <span class="ticker-item"><b>🧠</b> Tactics beat wallets</span>
+    <span class="ticker-item"><b>💰</b> Free to play. Never pay to win.</span>
+    <span class="ticker-item"><b>🏟️</b> Build your dynasty from scratch</span>
+  </div>
+</div>
+
+<!-- ══════ DASHBOARD (2nd section — first scroll) ══════ -->
+<section id="dashboard">
+  <p class="sec-eye reveal">Live This Season</p>
+  <h2 class="sec-title reveal">This Is What You're<br>Competing For</h2>
+  <div class="db-wrap">
+
+    <div class="season-bar reveal">
+      <div class="season-left">
+        <div class="live-dot"></div>
+        <span class="season-name">Season 14 — Premier Division</span>
+      </div>
+      <div style="display:flex;gap:.9rem;align-items:center;flex-wrap:wrap;">
+        <span class="season-meta">Week 11 of 14</span>
+        <span class="prize-badge">Prize Pool: £4,200</span>
+      </div>
+    </div>
+
+    <!-- Countdown -->
+    <div class="cd-row reveal">
+      <div class="cd-block"><div class="cd-num" id="cd-d">06</div><div class="cd-unit">Days</div></div>
+      <div class="cd-block"><div class="cd-num" id="cd-h">14</div><div class="cd-unit">Hours</div></div>
+      <div class="cd-block"><div class="cd-num" id="cd-m">22</div><div class="cd-unit">Mins</div></div>
+      <div class="cd-block"><div class="cd-num" id="cd-s">08</div><div class="cd-unit">Secs</div></div>
+    </div>
+
+    <!-- Tier bands -->
+    <div class="tier-bands reveal">
+      <div class="t-band gold">
+        <span class="t-rank">🥇 Top 10</span>
+        <span class="t-prize">£250–£800</span>
+        <span class="t-note">Verified cash payout</span>
+      </div>
+      <div class="t-band silver">
+        <span class="t-rank">🥈 Top 11–50</span>
+        <span class="t-prize">£40–£200</span>
+        <span class="t-note">Verified cash payout</span>
+      </div>
+      <div class="t-band bronze">
+        <span class="t-rank">🥉 Top 51–100</span>
+        <span class="t-prize">£10–£40</span>
+        <span class="t-note">Verified cash payout</span>
+      </div>
+    </div>
+
+    <!-- Leaderboard -->
+    <table class="lb-table reveal">
+      <thead>
+        <tr>
+          <th>#</th><th>Manager</th><th>Form</th><th>Pts</th><th>Prize</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="rk rk-1">1</span></td>
+          <td><div class="mgr-name">Manager_4471</div><div class="mgr-club">FC United Wolves · London</div></td>
+          <td><div class="form"><span class="fw">W</span><span class="fw">W</span><span class="fd">D</span><span class="fw">W</span><span class="fw">W</span></div></td>
+          <td><span class="pts">89</span></td>
+          <td><span class="prize-val prize-gold">£800</span></td>
+        </tr>
+        <tr>
+          <td><span class="rk rk-2">2</span></td>
+          <td><div class="mgr-name">Manager_9823</div><div class="mgr-club">Black Star Athletic · Manchester</div></td>
+          <td><div class="form"><span class="fw">W</span><span class="fd">D</span><span class="fw">W</span><span class="fw">W</span><span class="fl">L</span></div></td>
+          <td><span class="pts">84</span></td>
+          <td><span class="prize-val prize-silver">£550</span></td>
+        </tr>
+        <tr>
+          <td><span class="rk rk-3">3</span></td>
+          <td><div class="mgr-name">Manager_0017</div><div class="mgr-club">Iron Gate City · Birmingham</div></td>
+          <td><div class="form"><span class="fw">W</span><span class="fw">W</span><span class="fl">L</span><span class="fw">W</span><span class="fd">D</span></div></td>
+          <td><span class="pts">80</span></td>
+          <td><span class="prize-val prize-bronze">£400</span></td>
+        </tr>
+        <tr>
+          <td><span class="rk">4</span></td>
+          <td><div class="mgr-name">Manager_3302</div><div class="mgr-club">Northern Vale FC · Leeds</div></td>
+          <td><div class="form"><span class="fd">D</span><span class="fw">W</span><span class="fw">W</span><span class="fl">L</span><span class="fw">W</span></div></td>
+          <td><span class="pts">76</span></td>
+          <td><span class="prize-val prize-green">£250</span></td>
+        </tr>
+        <tr>
+          <td><span class="rk">5</span></td>
+          <td><div class="mgr-name">Manager_7756</div><div class="mgr-club">Sunset Rovers · Bristol</div></td>
+          <td><div class="form"><span class="fw">W</span><span class="fl">L</span><span class="fw">W</span><span class="fw">W</span><span class="fd">D</span></div></td>
+          <td><span class="pts">73</span></td>
+          <td><span class="prize-val prize-green">£250</span></td>
+        </tr>
+        <tr class="you-row">
+          <td colspan="5"><span class="you-label">↑ Top 10 still open. Your spot. Your £250. Three matchdays left. ↑</span></td>
+        </tr>
+        <tr>
+          <td><span class="rk">48</span></td>
+          <td><div class="mgr-name">Manager_5541</div><div class="mgr-club">East End United · Glasgow</div></td>
+          <td><div class="form"><span class="fl">L</span><span class="fw">W</span><span class="fd">D</span><span class="fl">L</span><span class="fw">W</span></div></td>
+          <td><span class="pts">51</span></td>
+          <td><span class="prize-val prize-green">£40</span></td>
+        </tr>
+        <tr>
+          <td><span class="rk">99</span></td>
+          <td><div class="mgr-name">Manager_2198</div><div class="mgr-club">Riverside SC · Cardiff</div></td>
+          <td><div class="form"><span class="fd">D</span><span class="fl">L</span><span class="fw">W</span><span class="fd">D</span><span class="fl">L</span></div></td>
+          <td><span class="pts">34</span></td>
+          <td><span class="prize-val prize-grey">£10</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="lb-foot reveal">
+      <span class="lb-foot-note">Real payouts · Verified managers only · <b>Everyone in top 100 earns</b> · Season ends in <b id="season-end">6d 14h</b></span>
+      <button class="lb-cta" onclick="document.getElementById('reward').scrollIntoView({behavior:'smooth'})">Claim Your Spot →</button>
+    </div>
+  </div>
+</section>
+
+<!-- ══════ STATS STRIP ══════ -->
+<section id="stats">
+  <div class="stats-strip">
+    <div class="stat-block reveal">
+      <span class="stat-big">0%</span>
+      <span class="stat-sub">Pay-to-Win</span>
+    </div>
+    <div class="stat-block reveal d1">
+      <span class="stat-big">£4.2K</span>
+      <span class="stat-sub">Season Prize Pool</span>
+    </div>
+    <div class="stat-block reveal d2">
+      <span class="stat-big">90'</span>
+      <span class="stat-sub">Full Match Simulation</span>
+    </div>
+    <div class="stat-block reveal d3">
+      <span class="stat-big">100%</span>
+      <span class="stat-sub">Skill-Based Outcomes</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══════ GAME LOOP ══════ -->
+<section id="loop">
+  <p class="sec-eye reveal">The Game Loop</p>
+  <h2 class="sec-title reveal">Five Steps. One Dynasty.</h2>
+  <div class="loop-track reveal">
+    <div class="lstep">
+      <div class="lstep-num">01</div>
+      <div class="lstep-title">Build Club</div>
+      <div class="lstep-desc">Stadium. Training ground. Scouting network. Your infrastructure is your edge.</div>
+      <span class="lstep-arrow">›</span>
+    </div>
+    <div class="lstep">
+      <div class="lstep-num">02</div>
+      <div class="lstep-title">Collect Players</div>
+      <div class="lstep-desc">No random pulls. Every signing is a deliberate decision that shapes your squad.</div>
+      <span class="lstep-arrow">›</span>
+    </div>
+    <div class="lstep">
+      <div class="lstep-num">03</div>
+      <div class="lstep-title">Set Tactics</div>
+      <div class="lstep-desc">Formation, press triggers, set pieces. Outthink your opponents before kickoff.</div>
+      <span class="lstep-arrow">›</span>
+    </div>
+    <div class="lstep">
+      <div class="lstep-num">04</div>
+      <div class="lstep-title">Compete</div>
+      <div class="lstep-desc">Weekly leagues vs real managers. Full 90-min sims. Real football data.</div>
+      <span class="lstep-arrow">›</span>
+    </div>
+    <div class="lstep">
+      <div class="lstep-num">05</div>
+      <div class="lstep-title">Earn Rewards</div>
+      <div class="lstep-desc">Finish on the leaderboard. Every verified manager in the top 100 earns real cash.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════ AI VISUAL ══════ -->
+<section id="visual">
+  <div class="vis-grid">
+    <div class="vis-copy reveal">
+      <h2>Your Club.<br><em>Your Rules.</em><br>Your Rewards.</h2>
+      <p class="vis-quote">"Like Football Manager — but your decisions actually pay off."</p>
+      <p>The simulation engine runs a full 90-minute match on real performance data. No dice rolls. No luck. Just football.</p>
+      <button class="btn-primary" onclick="document.getElementById('reward').scrollIntoView({behavior:'smooth'})">Start Your Legacy</button>
+    </div>
+    <div class="ai-frame reveal d2">
+      <!--
+        ★ Replace SVG with your AI image:
+          <img src="stadium.jpg" alt="Stadium" />
+
+        Adobe Firefly / ChatGPT prompt:
+        "Aerial cinematic view of a packed football stadium at night,
+         dramatic floodlights illuminating a glowing green pitch,
+         dense crowd, dark moody atmosphere, no text, no logos,
+         photorealistic, ultra-detailed, 4:3 ratio"
+      -->
+      <svg viewBox="0 0 480 360" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="pg" cx="50%" cy="50%" r="55%">
+            <stop offset="0%" stop-color="#1e5c21"/>
+            <stop offset="100%" stop-color="#0a150b"/>
+          </radialGradient>
+          <radialGradient id="f1" cx="12%" cy="12%" r="22%"><stop offset="0%" stop-color="rgba(255,240,160,.22)"/><stop offset="100%" stop-color="transparent"/></radialGradient>
+          <radialGradient id="f2" cx="88%" cy="12%" r="22%"><stop offset="0%" stop-color="rgba(255,240,160,.22)"/><stop offset="100%" stop-color="transparent"/></radialGradient>
+          <radialGradient id="f3" cx="12%" cy="88%" r="20%"><stop offset="0%" stop-color="rgba(255,240,160,.16)"/><stop offset="100%" stop-color="transparent"/></radialGradient>
+          <radialGradient id="f4" cx="88%" cy="88%" r="20%"><stop offset="0%" stop-color="rgba(255,240,160,.16)"/><stop offset="100%" stop-color="transparent"/></radialGradient>
+        </defs>
+        <rect width="480" height="360" fill="#060d06"/>
+        <rect y="0"   width="480" height="80"  fill="#0b160b"/>
+        <rect y="280" width="480" height="80"  fill="#0b160b"/>
+        <rect x="0"   width="60"  height="360" fill="#0b160b"/>
+        <rect x="420" width="60"  height="360" fill="#0b160b"/>
+        <g fill="rgba(181,240,51,.11)">
+          <circle cx="84" cy="26" r="2.5"/><circle cx="112" cy="17" r="2"/><circle cx="142" cy="31" r="2.5"/>
+          <circle cx="172" cy="20" r="2"/><circle cx="200" cy="28" r="2.5"/><circle cx="228" cy="15" r="2"/>
+          <circle cx="258" cy="26" r="2.5"/><circle cx="288" cy="18" r="2"/><circle cx="316" cy="30" r="2.5"/>
+          <circle cx="348" cy="13" r="2"/><circle cx="376" cy="27" r="2.5"/>
+          <circle cx="92" cy="50" r="2"/><circle cx="128" cy="43" r="2.5"/><circle cx="158" cy="56" r="2"/>
+          <circle cx="190" cy="42" r="2.5"/><circle cx="218" cy="52" r="2"/><circle cx="248" cy="40" r="2.5"/>
+          <circle cx="278" cy="53" r="2"/><circle cx="308" cy="46" r="2.5"/><circle cx="338" cy="55" r="2"/>
+          <circle cx="84" cy="306" r="2.5"/><circle cx="118" cy="320" r="2"/><circle cx="150" cy="308" r="2.5"/>
+          <circle cx="180" cy="324" r="2"/><circle cx="210" cy="312" r="2.5"/><circle cx="240" cy="326" r="2"/>
+          <circle cx="270" cy="314" r="2.5"/><circle cx="300" cy="321" r="2"/><circle cx="332" cy="308" r="2.5"/>
+        </g>
+        <rect x="60" y="80" width="360" height="200" fill="url(#pg)"/>
+        <g fill="rgba(255,255,255,.03)">
+          <rect x="60" y="80" width="36" height="200"/><rect x="132" y="80" width="36" height="200"/>
+          <rect x="204" y="80" width="36" height="200"/><rect x="276" y="80" width="36" height="200"/>
+          <rect x="348" y="80" width="36" height="200"/>
+        </g>
+        <g stroke="rgba(255,255,255,.28)" stroke-width="1.5" fill="none">
+          <rect x="60" y="80" width="360" height="200"/>
+          <line x1="240" y1="80" x2="240" y2="280"/>
+          <circle cx="240" cy="180" r="29"/>
+          <circle cx="240" cy="180" r="3" fill="rgba(255,255,255,.5)"/>
+          <rect x="60" y="126" width="38" height="108"/>
+          <rect x="382" y="126" width="38" height="108"/>
+          <circle cx="107" cy="180" r="2.5" fill="rgba(255,255,255,.5)"/>
+          <circle cx="373" cy="180" r="2.5" fill="rgba(255,255,255,.5)"/>
+        </g>
+        <rect width="480" height="360" fill="url(#f1)"/>
+        <rect width="480" height="360" fill="url(#f2)"/>
+        <rect width="480" height="360" fill="url(#f3)"/>
+        <rect width="480" height="360" fill="url(#f4)"/>
+        <text x="240" y="352" font-family="sans-serif" font-size="7.5" fill="rgba(181,240,51,.28)" text-anchor="middle" letter-spacing="3">REPLACE WITH AI GENERATED IMAGE</text>
+      </svg>
+      <span class="ai-badge">AI Generated</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══════ MANAGER SPOTLIGHT ══════ -->
+<section id="spotlight">
+  <p class="sec-eye reveal">Manager Spotlight</p>
+  <h2 class="sec-title reveal">What a Real Club Looks Like</h2>
+  <div class="spotlight-wrap reveal">
+    <div class="sp-layout">
+
+      <!-- LEFT: data column -->
+      <div class="sp-left">
+
+        <!-- Identity -->
+        <div class="sp-card">
+          <div class="sp-avatar">MK</div>
+          <div>
+            <span class="sp-name">Manager_8842 &nbsp;·&nbsp; "Iron Meridian FC"</span>
+            <span class="sp-meta">London, UK &nbsp;·&nbsp; Season 9 veteran &nbsp;·&nbsp; Verified</span>
+          </div>
+          <div class="sp-rank-badge">
+            <span class="sp-rank-num">#4</span>
+            <span class="sp-rank-label">This Season</span>
+          </div>
+        </div>
+
+        <!-- Season stats -->
+        <div class="sp-season-row">
+          <div class="sp-stat">
+            <span class="sp-stat-val">11</span>
+            <span class="sp-stat-label">Seasons</span>
+          </div>
+          <div class="sp-stat">
+            <span class="sp-stat-val green">W8 D1 L2</span>
+            <span class="sp-stat-label">Form</span>
+          </div>
+          <div class="sp-stat">
+            <span class="sp-stat-val">76</span>
+            <span class="sp-stat-label">Points</span>
+          </div>
+          <div class="sp-stat">
+            <span class="sp-stat-val gold">£1,340</span>
+            <span class="sp-stat-label">Total Earned</span>
+          </div>
+          <div class="sp-stat">
+            <span class="sp-stat-val green">£250</span>
+            <span class="sp-stat-label">This Season</span>
+          </div>
+        </div>
+
+        <!-- Infrastructure -->
+        <div class="sp-infra-list">
+
+          <div class="sp-infra">
+            <div class="sp-infra-icon">
+              <!-- Stadium icon -->
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--lime)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M2 20h20M4 20V10l8-6 8 6v10"/><path d="M10 20v-6h4v6"/><path d="M4 14h4M16 14h4"/>
+              </svg>
+            </div>
+            <div class="sp-infra-body">
+              <span class="sp-infra-name">Stadium</span>
+              <div class="sp-bar-wrap"><div class="sp-bar-fill" style="--w:82%"></div></div>
+              <span class="sp-bar-label">Capacity <b>42,000</b> · Level 4 of 5</span>
+            </div>
+          </div>
+
+          <div class="sp-infra">
+            <div class="sp-infra-icon">
+              <!-- Infrastructure / training icon -->
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--lime)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="7" width="20" height="14" rx="1"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/>
+              </svg>
+            </div>
+            <div class="sp-infra-body">
+              <span class="sp-infra-name">Infrastructure</span>
+              <div class="sp-bar-wrap"><div class="sp-bar-fill" style="--w:70%"></div></div>
+              <span class="sp-bar-label">Training Complex <b>Level 3</b> · Medical <b>Upgraded</b></span>
+            </div>
+          </div>
+
+          <div class="sp-infra">
+            <div class="sp-infra-icon">
+              <!-- Scouting / radar icon -->
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--lime)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="8"/><line x1="12" y1="16" x2="12" y2="22"/><line x1="2" y1="12" x2="8" y2="12"/><line x1="16" y1="12" x2="22" y2="12"/>
+              </svg>
+            </div>
+            <div class="sp-infra-body">
+              <span class="sp-infra-name">Scouting Network</span>
+              <div class="sp-bar-wrap"><div class="sp-bar-fill" style="--w:90%"></div></div>
+              <span class="sp-bar-label"><b>6 regions</b> covered · 14 prospects tracked</span>
+            </div>
+          </div>
+
+          <div class="sp-infra">
+            <div class="sp-infra-icon">
+              <!-- Sponsorship / handshake icon -->
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--lime)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17 11V7l-5-4-5 4v4"/><path d="M3 11l4 2 5-2 5 2 4-2"/><path d="M3 11v7l9 3 9-3v-7"/>
+              </svg>
+            </div>
+            <div class="sp-infra-body">
+              <span class="sp-infra-name">Sponsorships</span>
+              <div class="sp-bar-wrap"><div class="sp-bar-fill" style="--w:60%"></div></div>
+              <span class="sp-bar-label"><b>3 active deals</b> · Kit + Board + Naming rights</span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Tactics -->
+        <div class="sp-tactic-row">
+          <div class="sp-tactic">
+            <span class="sp-tactic-label">Formation</span>
+            <span class="sp-tactic-val"><em>4–3–3</em> High Press</span>
+          </div>
+          <div class="sp-tactic" style="border-left:1px solid var(--border)">
+            <span class="sp-tactic-label">Tactical Identity</span>
+            <span class="sp-tactic-val">Gegenpressing · <em>Wide</em></span>
+          </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="sp-foot">
+          <span class="sp-foot-note">Managers are <b>anonymous</b>. Stats & payouts are <b>verified</b>. You could be next.</span>
+          <button class="lb-cta" onclick="document.getElementById('reward').scrollIntoView({behavior:'smooth'})">Start Your Legacy →</button>
+        </div>
+
+      </div><!-- /sp-left -->
+
+      <!-- RIGHT: Club visual panel -->
+      <div class="sp-right">
+        <div class="sp-right-label">Iron Meridian FC · 4–3–3 Formation</div>
+        <div class="sp-pitch-wrap">
+          <!-- Tactical pitch illustration with 4-3-3 player dots -->
+          <svg viewBox="0 0 320 420" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:300px">
+            <defs>
+              <radialGradient id="spg" cx="50%" cy="50%" r="55%">
+                <stop offset="0%" stop-color="#1a5c1c"/>
+                <stop offset="100%" stop-color="#091409"/>
+              </radialGradient>
+              <radialGradient id="sp-glow" cx="50%" cy="45%" r="50%">
+                <stop offset="0%" stop-color="rgba(181,240,51,.06)"/>
+                <stop offset="100%" stop-color="transparent"/>
+              </radialGradient>
+              <filter id="dot-glow">
+                <feGaussianBlur stdDeviation="2" result="blur"/>
+                <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+              </filter>
+            </defs>
+
+            <!-- Pitch background -->
+            <rect width="320" height="420" fill="#080f08"/>
+            <rect x="16" y="16" width="288" height="388" fill="url(#spg)"/>
+            <rect x="16" y="16" width="288" height="388" fill="url(#sp-glow)"/>
+
+            <!-- Pitch stripes -->
+            <g fill="rgba(255,255,255,.025)">
+              <rect x="16" y="16" width="48" height="388"/>
+              <rect x="112" y="16" width="48" height="388"/>
+              <rect x="208" y="16" width="48" height="388"/>
+            </g>
+
+            <!-- Pitch markings -->
+            <g stroke="rgba(255,255,255,.25)" stroke-width="1" fill="none">
+              <!-- Outer boundary -->
+              <rect x="16" y="16" width="288" height="388"/>
+              <!-- Halfway line -->
+              <line x1="16" y1="210" x2="304" y2="210"/>
+              <!-- Centre circle -->
+              <circle cx="160" cy="210" r="38"/>
+              <circle cx="160" cy="210" r="2.5" fill="rgba(255,255,255,.4)"/>
+              <!-- Top penalty area -->
+              <rect x="74" y="16" width="172" height="72"/>
+              <!-- Top goal area -->
+              <rect x="112" y="16" width="96" height="30"/>
+              <!-- Top penalty spot -->
+              <circle cx="160" cy="62" r="2" fill="rgba(255,255,255,.4)"/>
+              <!-- Top penalty arc -->
+              <path d="M127,88 A38,38 0 0,1 193,88" fill="none"/>
+              <!-- Bottom penalty area -->
+              <rect x="74" y="332" width="172" height="72"/>
+              <!-- Bottom goal area -->
+              <rect x="112" y="374" width="96" height="30"/>
+              <!-- Bottom penalty spot -->
+              <circle cx="160" cy="358" r="2" fill="rgba(255,255,255,.4)"/>
+              <!-- Bottom penalty arc -->
+              <path d="M127,332 A38,38 0 0,0 193,332" fill="none"/>
+            </g>
+
+            <!-- ── 4-3-3 FORMATION (attacking upward) ── -->
+            <!-- GK -->
+            <g filter="url(#dot-glow)">
+              <circle cx="160" cy="380" r="9" fill="rgba(181,240,51,.15)" stroke="var(--lime)" stroke-width="1.5"/>
+              <text x="160" y="384" text-anchor="middle" font-family="'Barlow Condensed',sans-serif" font-size="8" font-weight="700" fill="var(--lime)">GK</text>
+            </g>
+
+            <!-- Defenders: 4 -->
+            <g filter="url(#dot-glow)">
+              <circle cx="66"  cy="318" r="9" fill="rgba(181,240,51,.15)" stroke="var(--lime)" stroke-width="1.5"/>
+              <text x="66"  y="322" text-anchor="middle" font-family="'Barlow Condensed',sans-serif" font-size="8" font-weight="700" fill="var(--lime)">LB</text>
+              <circle cx="120" cy="310" r="9" fill="rgba(181,240,51,.15)" stroke="var(--lime)" stroke-width="1.5"/>
+              <text x="120" y="314" text-anchor="middle" font-family="'Barlow Condensed',sans-serif" font-size="8" font-weight="700" fill="var(--lime)">CB</text>
+              <circle cx="200" cy="310" r="9" fill="rgba(181,240,51,.15)" stroke="var(--lime)" stroke-width="1.5"/>
+              <text x="200" y="314" text-anchor="middle" font-family="'Barlow Condensed',sans-serif" font-size="8" font-weight="700" fill="var(--lime)">CB</text>
+              <circle cx="254" cy="318" r="9" fill="rgba(181,240,51,.15)" stroke="var(--lime)" stroke-width="1.5"/>
+              <text x="254" y="322" text-anchor="middle" font-family="'Barlow Condensed',sans-serif" font-size="8" font-weight="700" fill="var(--lime)">RB</text>
+            </g>
+
+            <!-- Midfielders: 3 -->
+            <g filter="url(#dot-glow)">
+              <circle cx="90"  cy="230" r="9" fill="rgba(181,240,51,.2)" stroke="var(--lime)" stroke-width="1.5"/>
+              <text x="90"  y="234" text-anchor="middle" font-family="'Barlow Condensed',sans-serif" font-size="8" font-weight="700" fill="var(--lime)">LM</text>
+              <circle cx="160" cy="222" r="9" fill="rgba(181,240,51,.2)" stroke="var(--lime)" stroke-width="1.5"/>
+              <text x="160" y="226" text-anchor="middle" font-family="'Barlow Condensed',sans-serif" font-size="8" font-weight="700" fill="var(--lime)">CM</text>
+              <circle cx="230" cy="230" r="9" fill="rgba(181,240,51,.2)" stroke="var(--lime)" stroke-width="1.5"/>
+              <text x="230" y="234" text-anchor="middle" font-family="'Barlow Condensed',sans-serif" font-size="8" font-weight="700" fill="var(--lime)">RM</text>
+            </g>
+
+            <!-- Attackers: 3 -->
+            <g filter="url(#dot-glow)">
+              <circle cx="80"  cy="138" r="9" fill="rgba(181,240,51,.28)" stroke="var(--lime)" stroke-width="2"/>
+              <text x="80"  y="142" text-anchor="middle" font-family="'Barlow Condensed',sans-serif" font-size="8" font-weight="700" fill="var(--lime)">LW</text>
+              <circle cx="160" cy="125" r="10" fill="rgba(181,240,51,.3)" stroke="var(--lime)" stroke-width="2"/>
+              <text x="160" y="129" text-anchor="middle" font-family="'Barlow Condensed',sans-serif" font-size="9" font-weight="700" fill="var(--lime)">ST</text>
+              <circle cx="240" cy="138" r="9" fill="rgba(181,240,51,.28)" stroke="var(--lime)" stroke-width="2"/>
+              <text x="240" y="142" text-anchor="middle" font-family="'Barlow Condensed',sans-serif" font-size="8" font-weight="700" fill="var(--lime)">RW</text>
+            </g>
+
+            <!-- Connecting lines (subtle) -->
+            <g stroke="rgba(181,240,51,.1)" stroke-width="1" fill="none">
+              <!-- GK to defenders -->
+              <line x1="160" y1="371" x2="66"  y2="327"/>
+              <line x1="160" y1="371" x2="120" y2="319"/>
+              <line x1="160" y1="371" x2="200" y2="319"/>
+              <line x1="160" y1="371" x2="254" y2="327"/>
+              <!-- Defenders to mids -->
+              <line x1="66"  y1="309" x2="90"  y2="239"/>
+              <line x1="120" y1="301" x2="160" y2="231"/>
+              <line x1="200" y1="301" x2="160" y2="231"/>
+              <line x1="254" y1="309" x2="230" y2="239"/>
+              <!-- Mids to attackers -->
+              <line x1="90"  y1="221" x2="80"  y2="147"/>
+              <line x1="160" y1="213" x2="160" y2="135"/>
+              <line x1="230" y1="221" x2="240" y2="147"/>
+            </g>
+          </svg>
+        </div>
+
+        <!-- Club quick details -->
+        <div class="sp-club-details">
+          <div class="sp-detail-item">
+            <span class="sp-detail-key">Club Name</span>
+            <span class="sp-detail-val"><em>Iron Meridian FC</em></span>
+          </div>
+          <div class="sp-detail-item">
+            <span class="sp-detail-key">League</span>
+            <span class="sp-detail-val">Premier Division</span>
+          </div>
+          <div class="sp-detail-item">
+            <span class="sp-detail-key">Squad Size</span>
+            <span class="sp-detail-val"><em>24</em> players</span>
+          </div>
+          <div class="sp-detail-item">
+            <span class="sp-detail-key">Manager Rating</span>
+            <span class="sp-detail-val"><em>94</em> / 100</span>
+          </div>
+        </div>
+
+      </div><!-- /sp-right -->
+    </div><!-- /sp-layout -->
+  </div>
+</section>
+
+<!-- ══════ REWARD ══════ -->
+<section id="reward">
+  <h2>Win Real Money.<br>Every Season.</h2>
+  <p>The only mobile football management game where your skill directly pays off. Every verified manager in the top 100 earns a real cash reward at season's end.</p>
+  <button class="btn-dark">Start Your Legacy</button>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-logo">Legendary Club Owner</span>
+  <p>© 2025 No Surrender Studio · International launch coming soon</p>
+</footer>
+
+<script>
+  // Scroll reveal
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if(e.isIntersecting) {
+        e.target.classList.add('visible');
+        // Animate progress bars inside revealed elements
+        e.target.querySelectorAll('.sp-bar-fill').forEach(b => b.classList.add('animate'));
+      }
+    });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+  // Live countdown
+  const end = Date.now() + (6*86400 + 14*3600 + 22*60 + 8)*1000;
+  function tick() {
+    const d = Math.max(0, end - Date.now());
+    const dd = Math.floor(d/86400000);
+    const hh = Math.floor((d%86400000)/3600000);
+    const mm = Math.floor((d%3600000)/60000);
+    const ss = Math.floor((d%60000)/1000);
+    document.getElementById('cd-d').textContent = String(dd).padStart(2,'0');
+    document.getElementById('cd-h').textContent = String(hh).padStart(2,'0');
+    document.getElementById('cd-m').textContent = String(mm).padStart(2,'0');
+    document.getElementById('cd-s').textContent = String(ss).padStart(2,'0');
+    document.getElementById('season-end').textContent = `${dd}d ${hh}h`;
+  }
+  tick(); setInterval(tick, 1000);
+
+  // Leaderboard pts shimmer — random row +1 every 7s
+  const ptsCells = document.querySelectorAll('.pts');
+  setInterval(() => {
+    const el = ptsCells[Math.floor(Math.random()*ptsCells.length)];
+    el.textContent = parseInt(el.textContent) + 1;
+    el.style.color = 'var(--lime)';
+    setTimeout(() => { el.style.color = ''; }, 800);
+  }, 7000);
+</script>
+</body>
+</html>
